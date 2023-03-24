@@ -17,7 +17,11 @@ app.set('view engine', 'ejs')
 app.set('views', 'views')
 
 app.use(morgan('dev'))
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: false
+}))
 app.use(cors())
 app.use(cookieParser())
 app.use(bodyParser.json())
