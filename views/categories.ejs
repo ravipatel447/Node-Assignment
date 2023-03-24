@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      setTimeout(() => {
+        document.getElementById('toast-warning').style = 'display:none'
+      }, 3000)
+    </script>
   </head>
   <body>
     <%- include('./includes/header.ejs') %>

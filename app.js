@@ -1,34 +1,28 @@
+require('dotenv').config()
+require('./src/db/mongoose')
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 3000
+const config = require('./config/config')
+const PORT = config.port || 3000
 const path = require('path')
+const pageRouter = require('./src/routes/page.route')
+const userRouter = require('./src/routes/user.route')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const morgan = require('morgan')
 
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
+app.use(morgan('dev'))
+app.use(cookieParser())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/home', (req, res) => {
-  res.render('index')
-})
-app.get('/about', (req, res) => {
-  res.render('about')
-})
-app.get('/services', (req, res) => {
-  res.render('services')
-})
-app.get('/categories', (req, res) => {
-  res.render('categories')
-})
-app.get('/login', (req, res) => {
-  res.render('login')
-})
-app.get('/register', (req, res) => {
-  res.render('register')
-})
-app.get('/', (req, res) => {
-  res.render('index')
-})
+app.use(pageRouter)
+app.use('/api/v1', userRouter)
+
 app.listen(PORT, () => {
   console.log(`we are listing at port ${PORT}`)
 })
