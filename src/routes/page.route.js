@@ -11,5 +11,6 @@ pageRouter.get('/categories', userAuth, pageController.getCatagory)
 pageRouter.get('/login', userAuth, pageController.getLogin)
 pageRouter.get('/register', userAuth, pageController.getRegister)
 pageRouter.get('/profile', userAuth, pageController.getProfile)
+pageRouter.get('/*', userAuth, pageController.get404)
 
 module.exports = pageRouter
