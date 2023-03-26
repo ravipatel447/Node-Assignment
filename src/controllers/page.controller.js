@@ -1,34 +1,46 @@
 module.exports = {
   getHome: (req, res) => {
-    res.render('index', { isAuthenticated: req.isAuthenticated, error: false })
+    res
+      .status(200)
+      .render('index', { isAuthenticated: req.isAuthenticated, error: false })
   },
   getAbout: (req, res) => {
-    res.render('about', { isAuthenticated: req.isAuthenticated, error: false })
+    res
+      .status(200)
+      .render('about', { isAuthenticated: req.isAuthenticated, error: false })
   },
   getService: (req, res) => {
-    res.render('services', {
+    res.status(200).render('services', {
       isAuthenticated: req.isAuthenticated,
       error: false
     })
   },
   getCatagory: (req, res) => {
-    res.render('categories', {
+    res.status(200).render('categories', {
       isAuthenticated: req.isAuthenticated,
       error: false
     })
   },
   getLogin: (req, res) => {
-    res.render('login', { isAuthenticated: req.isAuthenticated, error: false })
+    res
+      .status(200)
+      .render('login', { isAuthenticated: req.isAuthenticated, error: false })
   },
   getRegister: (req, res) => {
-    res.render('register', {
+    res.status(200).render('register', {
+      isAuthenticated: req.isAuthenticated,
+      error: false
+    })
+  },
+  get404: (req, res) => {
+    res.status(200).render('404', {
       isAuthenticated: req.isAuthenticated,
       error: false
     })
   },
   getProfile: (req, res) => {
     if (req.user && req.isAuthenticated) {
-      res.render('profile', {
+      res.status(200).render('profile', {
         data: {
           name: req.user.name,
           email: req.user.email
@@ -37,7 +49,7 @@ module.exports = {
         error: false
       })
     } else {
-      res.redirect('/')
+      res.status(300).redirect('/')
     }
   }
 }
