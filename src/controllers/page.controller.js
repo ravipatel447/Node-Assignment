@@ -43,7 +43,9 @@ module.exports = {
       res.status(200).render('profile', {
         data: {
           name: req.user.name,
-          email: req.user.email
+          email: req.user.email,
+          isProfile: req.user.profile !== '',
+          profileUrl: req.user.profile
         },
         isAuthenticated: req.isAuthenticated,
         error: false

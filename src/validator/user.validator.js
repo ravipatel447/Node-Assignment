@@ -30,7 +30,7 @@ const loginValidation = ({ email, password }) => {
 }
 
 const registerValidation = ({ name, email, password }) => {
-  if (!name.trim().length >= 2) {
+  if (name.trim().length <= 2) {
     return { error: true, message: 'Enter Name Properly' }
   } else if (!validateEmail(email)) {
     return { error: true, message: 'Please enter Valid Email' }
@@ -43,6 +43,7 @@ const registerValidation = ({ name, email, password }) => {
         name: name.trim(),
         email: email.toLowerCase().trim(),
         password,
+        profile: '',
         role: 'user'
       }
     }
