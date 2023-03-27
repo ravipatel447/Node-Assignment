@@ -10,12 +10,15 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
-    unique: true,
+    unique: [true, 'User Email is Already Exist'],
     required: true
   },
   password: {
     type: String,
     required: true
+  },
+  profile: {
+    type: String
   },
   role: {
     type: String,
@@ -61,7 +64,19 @@ userSchema.pre('save', async function (next) {
   }
   next()
 })
-
+userSchema.post('save', function (error, doc, next) {
+  if (
+    error.keyValue.email != null &&
+    error.code === 11000 &&
+    error.keyPattern.email === 1
+  ) {
+    throw new Error('User already Exists with this email')
+  }
+  if (error) {
+    throw new Error(error.message)
+  }
+  next()
+})
 const User = mongoose.model('User', userSchema)
 
 module.exports = User

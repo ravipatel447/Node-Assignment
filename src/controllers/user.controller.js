@@ -52,6 +52,38 @@ module.exports = {
       })
     }
   },
+  userProfileUpload: async (req, res) => {
+    try {
+      const user = req.user
+      if (!req.file) {
+        throw new Error('please Upload only JPG/JPEG/PNG image')
+      }
+      user.profile = req.file.path
+      user.save()
+      res.status(201).render('profile', {
+        data: {
+          name: req.user.name,
+          email: req.user.email,
+          isProfile: true,
+          profileUrl: user.profile
+        },
+        isAuthenticated: req.isAuthenticated,
+        error: false
+      })
+    } catch (error) {
+      return res.status(500).render('profile', {
+        data: {
+          name: req.user.name,
+          email: req.user.email,
+          isProfile: req.user.profile !== '',
+          profileUrl: req.user.profile
+        },
+        isAuthenticated: req.isAuthenticated,
+        error: true,
+        errorMessage: error.message
+      })
+    }
+  },
   userLogoutAll: async (req, res) => {
     try {
       const user = req.user
