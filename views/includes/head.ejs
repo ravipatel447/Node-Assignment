@@ -1,17 +1,17 @@
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-        <%= title %>
-    </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        setTimeout(() => {
-            document.getElementById('toast-warning').style = 'display:none'
-        }, 3000)
-        function closeError() {
-            document.getElementById('toast-warning').style = 'display:none'
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.svg" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css"
+    rel="stylesheet"
+  />
+  <script>
+    setTimeout(() => {
+      document.getElementById('toast-warning').style = 'display:none'
+    }, 5000)
+  </script>
 </head>
